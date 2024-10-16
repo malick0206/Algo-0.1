@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse de Phrase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+    <script>
+        function analyserPhrase() {
+            const phrase = document.getElementById("phrase").value;
+
+            // Vérification que la phrase se termine par un point
+            if (!phrase.endsWith('.')) {
+                alert('La phrase doit se terminer par un point.');
+                return;
+            }
+
+            // Initialisation des compteurs
+            let longueurPhrase = 0;
+            let nombreMots = 0;
+            let nombreVoyelles = 0;
+
+            // Traitement de la phrase caractère par caractère
+            for (let caractere of phrase) {
+                // Compter la longueur (tous les caractères)
+                longueurPhrase++;
+
+                // Vérifier si le caractère est une voyelle
+                if ('aeiouyAEIOUY'.includes(caractere)) {
+                    nombreVoyelles++;
+                }
+            }
+
+            // Compter le nombre de mots
+            nombreMots = phrase.trim().split(/\s+/).length - 1; // Soustraction de 1 pour le point final
+
+            // Affichage des résultats
+            document.getElementById("resultats").innerHTML = `
+                <p><strong>Longueur de la phrase :</strong> ${longueurPhrase}</p>
+                <p><strong>Nombre de mots :</strong> ${nombreMots}</p>
+                <p><strong>Nombre de voyelles :</strong> ${nombreVoyelles}</p>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h1>Analyse de Phrase</h1>
+    <label for="phrase">Entrez une phrase se terminant par un point :</label><br>
+    <input type="text" id="phrase" required>
+    <button onclick="analyserPhrase()">Analyser</button>
+
+    <div id="resultats"></div>
+</body>
+</html>
